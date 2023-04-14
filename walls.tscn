@@ -3,27 +3,27 @@
 [ext_resource type="Texture2D" uid="uid://cjl33ffb33csa" path="res://square.png" id="1_bqesd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e3sll"]
-size = Vector2(16, 480)
+size = Vector2(104, 800)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jejhj"]
-size = Vector2(16, 480)
+size = Vector2(104, 800)
 
 [node name="Walls" type="StaticBody2D"]
 
 [node name="LeftWallSprite" type="Sprite2D" parent="."]
-position = Vector2(-288, 16)
-scale = Vector2(1, 30)
+position = Vector2(-332, 16)
+scale = Vector2(6.5, 50)
 texture = ExtResource("1_bqesd")
 
 [node name="LeftWallCollisionShape" type="CollisionShape2D" parent="."]
-position = Vector2(-288, 16)
+position = Vector2(-332, 16)
 shape = SubResource("RectangleShape2D_e3sll")
 
 [node name="RightWallSprite" type="Sprite2D" parent="."]
-position = Vector2(288, 16)
-scale = Vector2(1, 30)
+position = Vector2(332, 16)
+scale = Vector2(6.5, 50)
 texture = ExtResource("1_bqesd")
 
 [node name="RightWallCollisionShape" type="CollisionShape2D" parent="."]
-position = Vector2(288, 16)
+position = Vector2(332, 16)
 shape = SubResource("RectangleShape2D_jejhj")
