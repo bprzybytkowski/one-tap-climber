@@ -1,165 +1,72 @@
-[gd_scene load_steps=7 format=3 uid="uid://s2ij3nghpsof"]
+[gd_scene load_steps=10 format=3 uid="uid://cmhrkvrvsljb1"]
 
 [ext_resource type="PackedScene" uid="uid://bbf4xecuyrvy8" path="res://player.tscn" id="1_5adad"]
+[ext_resource type="Script" path="res://main.gd" id="1_cvonc"]
 [ext_resource type="PackedScene" uid="uid://7ond522j1vf0" path="res://walls.tscn" id="2_i4m7u"]
-[ext_resource type="PackedScene" uid="uid://c5t4p6dlbyc34" path="res://floor.tscn" id="3_tlb3a"]
-[ext_resource type="Script" path="res://Platforms.gd" id="4_2nre8"]
-[ext_resource type="Texture2D" uid="uid://cjl33ffb33csa" path="res://square.png" id="5_7iywt"]
+[ext_resource type="Script" path="res://floors.gd" id="3_23p3n"]
+[ext_resource type="PackedScene" uid="uid://c5t4p6dlbyc34" path="res://ground.tscn" id="3_tlb3a"]
+[ext_resource type="Script" path="res://ground_resetter.gd" id="8_wsjue"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6qd1p"]
-size = Vector2(80, 16)
+[sub_resource type="GDScript" id="GDScript_lvdt1"]
+script/source = "extends Area2D
+
+@export var start_falling_after : float = 5
+var timer : float = 0
+@onready var main : Node2D = $\"..\"
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+
+func _on_area_entered(area):
+	if area.name == \"Floor\":
+#		area.queue_free()
+		main.create_new_floor()
+"
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_e0ftt"]
+a = Vector2(-424, 0)
+b = Vector2(424, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_xc6xe"]
+a = Vector2(424, 0)
+b = Vector2(-424, 0)
 
 [node name="World" type="Node2D"]
+script = ExtResource("1_cvonc")
 
 [node name="Player" parent="." instance=ExtResource("1_5adad")]
+position = Vector2(0, -23)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -192)
+position = Vector2(0, -264)
 
 [node name="Walls" parent="." instance=ExtResource("2_i4m7u")]
 position = Vector2(0, -240)
 
-[node name="Floor" parent="." instance=ExtResource("3_tlb3a")]
+[node name="Floors" type="Node2D" parent="."]
+script = ExtResource("3_23p3n")
 
-[node name="Platforms" type="StaticBody2D" parent="."]
-script = ExtResource("4_2nre8")
+[node name="Ground" parent="Floors" instance=ExtResource("3_tlb3a")]
 
-[node name="Sprite2D" type="Sprite2D" parent="Platforms"]
-position = Vector2(-240, -56)
-scale = Vector2(5, 1)
-texture = ExtResource("5_7iywt")
+[node name="Resetter" type="Area2D" parent="."]
+position = Vector2(0, 128)
+script = SubResource("GDScript_lvdt1")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms"]
-position = Vector2(-240, -56)
-shape = SubResource("RectangleShape2D_6qd1p")
-one_way_collision = true
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Resetter"]
+position = Vector2(0, 16)
+shape = SubResource("SegmentShape2D_e0ftt")
 
-[node name="Sprite2D2" type="Sprite2D" parent="Platforms"]
-position = Vector2(-88, -56)
-scale = Vector2(5, 1)
-texture = ExtResource("5_7iywt")
+[node name="GroundResetter" type="Area2D" parent="."]
+position = Vector2(0, 384)
+script = ExtResource("8_wsjue")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Platforms"]
-position = Vector2(-88, -56)
-shape = SubResource("RectangleShape2D_6qd1p")
-one_way_collision = true
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundResetter"]
+shape = SubResource("SegmentShape2D_xc6xe")
 
-[node name="Sprite2D3" type="Sprite2D" parent="Platforms"]
-position = Vector2(88, -56)
-scale = Vector2(5, 1)
-texture = ExtResource("5_7iywt")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Platforms"]
-position = Vector2(88, -56)
-shape = SubResource("RectangleShape2D_6qd1p")
-one_way_collision = true
-
-[node name="Sprite2D4" type="Sprite2D" parent="Platforms"]
-position = Vector2(240, -56)
-scale = Vector2(5, 1)
-texture = ExtResource("5_7iywt")
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Platforms"]
-position = Vector2(240, -56)
-shape = SubResource("RectangleShape2D_6qd1p")
-one_way_collision = true
-
-[node name="Sprite2D5" type="Sprite2D" parent="Platforms"]
-position = Vector2(-160, -136)
-scale = Vector2(5, 1)
-texture = ExtResource("5_7iywt")
-
-[node name="CollisionShape2D5" type="CollisionShape2D" parent="Platforms"]
-position = Vector2(-160, -136)
-shape = SubResource("RectangleShape2D_6qd1p")
-one_way_collision = true
-
-[node name="Sprite2D6" type="Sprite2D" parent="Platforms"]
-position = Vector2(-8, -136)
-scale = Vector2(5, 1)
-texture = ExtResource("5_7iywt")
-
-[node name="CollisionShape2D6" type="CollisionShape2D" parent="Platforms"]
-position = Vector2(-8, -136)
-shape = SubResource("RectangleShape2D_6qd1p")
-one_way_collision = true
-
-[node name="Sprite2D7" type="Sprite2D" parent="Platforms"]
-position = Vector2(168, -136)
-scale = Vector2(5, 1)
-texture = ExtResource("5_7iywt")
-
-[node name="CollisionShape2D7" type="CollisionShape2D" parent="Platforms"]
-position = Vector2(168, -136)
-shape = SubResource("RectangleShape2D_6qd1p")
-one_way_collision = true
-
-[node name="Sprite2D8" type="Sprite2D" parent="Platforms"]
-position = Vector2(-240, -224)
-scale = Vector2(5, 1)
-texture = ExtResource("5_7iywt")
-
-[node name="CollisionShape2D8" type="CollisionShape2D" parent="Platforms"]
-position = Vector2(-240, -224)
-shape = SubResource("RectangleShape2D_6qd1p")
-one_way_collision = true
-
-[node name="Sprite2D9" type="Sprite2D" parent="Platforms"]
-position = Vector2(-88, -224)
-scale = Vector2(5, 1)
-texture = ExtResource("5_7iywt")
-
-[node name="CollisionShape2D9" type="CollisionShape2D" parent="Platforms"]
-position = Vector2(-88, -224)
-shape = SubResource("RectangleShape2D_6qd1p")
-one_way_collision = true
-
-[node name="Sprite2D10" type="Sprite2D" parent="Platforms"]
-position = Vector2(88, -224)
-scale = Vector2(5, 1)
-texture = ExtResource("5_7iywt")
-
-[node name="CollisionShape2D10" type="CollisionShape2D" parent="Platforms"]
-position = Vector2(88, -224)
-shape = SubResource("RectangleShape2D_6qd1p")
-one_way_collision = true
-
-[node name="Sprite2D11" type="Sprite2D" parent="Platforms"]
-position = Vector2(240, -224)
-scale = Vector2(5, 1)
-texture = ExtResource("5_7iywt")
-
-[node name="CollisionShape2D11" type="CollisionShape2D" parent="Platforms"]
-position = Vector2(240, -224)
-shape = SubResource("RectangleShape2D_6qd1p")
-one_way_collision = true
-
-[node name="Sprite2D12" type="Sprite2D" parent="Platforms"]
-position = Vector2(-160, -304)
-scale = Vector2(5, 1)
-texture = ExtResource("5_7iywt")
-
-[node name="CollisionShape2D12" type="CollisionShape2D" parent="Platforms"]
-position = Vector2(-160, -304)
-shape = SubResource("RectangleShape2D_6qd1p")
-one_way_collision = true
-
-[node name="Sprite2D13" type="Sprite2D" parent="Platforms"]
-position = Vector2(-8, -304)
-scale = Vector2(5, 1)
-texture = ExtResource("5_7iywt")
-
-[node name="CollisionShape2D13" type="CollisionShape2D" parent="Platforms"]
-position = Vector2(-8, -304)
-shape = SubResource("RectangleShape2D_6qd1p")
-one_way_collision = true
-
-[node name="Sprite2D14" type="Sprite2D" parent="Platforms"]
-position = Vector2(168, -304)
-scale = Vector2(5, 1)
-texture = ExtResource("5_7iywt")
-
-[node name="CollisionShape2D14" type="CollisionShape2D" parent="Platforms"]
-position = Vector2(168, -304)
-shape = SubResource("RectangleShape2D_6qd1p")
-one_way_collision = true
+[connection signal="area_entered" from="Resetter" to="." method="_on_resetter_area_entered"]
+[connection signal="body_entered" from="GroundResetter" to="GroundResetter" method="_on_body_entered"]
