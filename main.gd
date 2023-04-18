@@ -4,8 +4,6 @@ class_name Main
 
 var floor = preload("res://floor.tscn")
 @onready var floors_node = get_node("Floors")
-@export var start_falling_after : float = 5
-var timer : float = 0
 @export var floorsToCreate : int = 12
 var yPos : float = -56
 var yPosStep : float = -64
