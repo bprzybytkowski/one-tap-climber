@@ -1,0 +1,76 @@
+[gd_scene load_steps=11 format=3 uid="uid://cd0jbiomea03q"]
+
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_7a8g2"]
+[ext_resource type="PackedScene" uid="uid://brnwv4snjk6fi" path="res://scenes/player.tscn" id="2_rmhlp"]
+[ext_resource type="Script" path="res://scenes/camera.gd" id="3_ldhw2"]
+[ext_resource type="PackedScene" uid="uid://oa4rrxoui841" path="res://scenes/ground.tscn" id="4_r1111"]
+[ext_resource type="PackedScene" uid="uid://b63qmotsuhns8" path="res://scenes/walls.tscn" id="5_2pib7"]
+[ext_resource type="Script" path="res://scenes/resetters.gd" id="6_6fnn1"]
+[ext_resource type="Script" path="res://scenes/ground_resetter.gd" id="7_4b4be"]
+[ext_resource type="Script" path="res://scenes/despawner.gd" id="8_7m0gy"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_e0ftt"]
+a = Vector2(-768, 0)
+b = Vector2(768, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_xc6xe"]
+a = Vector2(424, 0)
+b = Vector2(-424, 0)
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_7a8g2")
+
+[node name="Player" parent="." instance=ExtResource("2_rmhlp")]
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(0, -376)
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 1.0
+drag_top_margin = 1.0
+drag_right_margin = 1.0
+drag_bottom_margin = 1.0
+editor_draw_limits = true
+editor_draw_drag_margin = true
+script = ExtResource("3_ldhw2")
+
+[node name="Floors" type="Node2D" parent="."]
+
+[node name="Ground" parent="Floors" instance=ExtResource("4_r1111")]
+
+[node name="WallsNode" type="Node2D" parent="."]
+
+[node name="Walls" parent="WallsNode" instance=ExtResource("5_2pib7")]
+position = Vector2(0, -352)
+
+[node name="Resetters" type="Node2D" parent="."]
+position = Vector2(0, -384)
+script = ExtResource("6_6fnn1")
+
+[node name="Resetter" type="Area2D" parent="Resetters"]
+position = Vector2(0, 472)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Resetters/Resetter"]
+shape = SubResource("SegmentShape2D_e0ftt")
+
+[node name="WallsSpawner" type="Area2D" parent="Resetters"]
+position = Vector2(0, 640)
+script = ExtResource("7_4b4be")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Resetters/WallsSpawner"]
+shape = SubResource("SegmentShape2D_xc6xe")
+
+[node name="Despawner" type="Area2D" parent="Resetters"]
+position = Vector2(0, 1544)
+script = ExtResource("8_7m0gy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Resetters/Despawner"]
+position = Vector2(0, 248)
+shape = SubResource("SegmentShape2D_xc6xe")
+
+[connection signal="area_exited" from="Resetters/Resetter" to="." method="_on_resetter_area_exited"]
+[connection signal="body_entered" from="Resetters/Resetter" to="Player" method="_on_resetter_body_entered"]
+[connection signal="body_entered" from="Resetters/WallsSpawner" to="Resetters/WallsSpawner" method="_on_body_entered"]
+[connection signal="body_exited" from="Resetters/WallsSpawner" to="Resetters/WallsSpawner" method="_on_body_exited"]
+[connection signal="area_entered" from="Resetters/Despawner" to="Resetters/Despawner" method="_on_area_entered"]
+[connection signal="body_entered" from="Resetters/Despawner" to="Resetters/Despawner" method="_on_body_entered"]

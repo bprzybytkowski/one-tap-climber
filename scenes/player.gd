@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
-const SPEED = 120.0
-const JUMP_VELOCITY = -400.0
+const SPEED = 140.0
+const JUMP_VELOCITY = -480.0
 
 var direction = 1
 
@@ -25,5 +25,9 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _on_area_2d_body_entered(body):
-	if body.name == "Walls":
+	if "Walls" in body.name:
 		direction *= -1
+
+func _on_resetter_body_entered(body):
+	if body.name == "Player":
+		get_tree().reload_current_scene()

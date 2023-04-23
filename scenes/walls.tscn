@@ -1,29 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://7ond522j1vf0"]
+[gd_scene load_steps=4 format=3 uid="uid://b63qmotsuhns8"]
 
-[ext_resource type="Texture2D" uid="uid://cjl33ffb33csa" path="res://square.png" id="1_bqesd"]
+[ext_resource type="Texture2D" uid="uid://cjl33ffb33csa" path="res://assets/square.png" id="1_ayq58"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e3sll"]
-size = Vector2(104, 752)
+size = Vector2(104, 1184)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jejhj"]
-size = Vector2(104, 752)
+size = Vector2(104, 1184)
 
 [node name="Walls" type="StaticBody2D"]
 
 [node name="LeftWallSprite" type="Sprite2D" parent="."]
-position = Vector2(-372, -8)
-scale = Vector2(6.5, 47)
-texture = ExtResource("1_bqesd")
+position = Vector2(-244, -48)
+scale = Vector2(6.5, 74)
+texture = ExtResource("1_ayq58")
 
 [node name="LeftWallCollisionShape" type="CollisionShape2D" parent="."]
-position = Vector2(-372, -8)
+position = Vector2(-244, -48)
 shape = SubResource("RectangleShape2D_e3sll")
 
 [node name="RightWallSprite" type="Sprite2D" parent="."]
-position = Vector2(372, -8)
-scale = Vector2(6.5, 47)
-texture = ExtResource("1_bqesd")
+position = Vector2(244, -48)
+scale = Vector2(6.5, 74)
+texture = ExtResource("1_ayq58")
 
 [node name="RightWallCollisionShape" type="CollisionShape2D" parent="."]
-position = Vector2(372, -8)
+position = Vector2(244, -48)
 shape = SubResource("RectangleShape2D_jejhj")

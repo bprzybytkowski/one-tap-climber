@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://pgk2y00gdamb"]
+[gd_scene load_steps=3 format=3 uid="uid://rsmuv7ei8ajd"]
 
-[ext_resource type="Texture2D" uid="uid://cjl33ffb33csa" path="res://square.png" id="2_t2hea"]
+[ext_resource type="Texture2D" uid="uid://cjl33ffb33csa" path="res://assets/square.png" id="1_kqf36"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6qd1p"]
 size = Vector2(16, 16)
@@ -9,7 +9,7 @@ size = Vector2(16, 16)
 sync_to_physics = false
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_t2hea")
+texture = ExtResource("1_kqf36")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_6qd1p")
