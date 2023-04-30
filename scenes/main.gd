@@ -2,7 +2,7 @@ extends Node2D
 
 class_name Main
 
-var floor = preload("res://scenes/floor.tscn")
+var floor_scene = preload("res://scenes/floor.tscn")
 @onready var floors_node = get_node("Floors")
 @export var floorsToCreate : int = 12
 var yPos : float = -96
@@ -17,7 +17,7 @@ func _ready():
 		create_new_floor(yPos)
 		
 func create_new_floor(currentYPos : float):
-	var floor_instance = floor.instantiate()
+	var floor_instance = floor_scene.instantiate()
 	# bind() method creates an additional parameter passed to the _update_score
 	# function, so that it's possible to access specific floor_instance properties
 	floor_instance.area_entered.connect(_update_score.bind(floor_instance))

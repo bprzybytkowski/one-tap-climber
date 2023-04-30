@@ -36,18 +36,6 @@ script = ExtResource("10_vxac8")
 
 [node name="Player" parent="." instance=ExtResource("2_rmhlp")]
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(0, -376)
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
-drag_left_margin = 1.0
-drag_top_margin = 1.0
-drag_right_margin = 1.0
-drag_bottom_margin = 1.0
-editor_draw_limits = true
-editor_draw_drag_margin = true
-script = ExtResource("3_ldhw2")
-
 [node name="Floors" type="Node2D" parent="."]
 
 [node name="Ground" parent="Floors" instance=ExtResource("4_r1111")]
@@ -82,10 +70,13 @@ script = ExtResource("8_7m0gy")
 position = Vector2(0, 248)
 shape = SubResource("SegmentShape2D_xc6xe")
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -352)
+script = ExtResource("3_ldhw2")
+
 [connection signal="score" from="." to="UI/Score" method="_on_world_score"]
 [connection signal="area_exited" from="Resetters/Resetter" to="." method="_on_resetter_area_exited"]
 [connection signal="body_entered" from="Resetters/Resetter" to="Player" method="_on_resetter_body_entered"]
 [connection signal="body_entered" from="Resetters/WallsSpawner" to="Resetters/WallsSpawner" method="_on_body_entered"]
-[connection signal="body_exited" from="Resetters/WallsSpawner" to="Resetters/WallsSpawner" method="_on_body_exited"]
 [connection signal="area_entered" from="Resetters/Despawner" to="Resetters/Despawner" method="_on_area_entered"]
 [connection signal="body_entered" from="Resetters/Despawner" to="Resetters/Despawner" method="_on_body_entered"]
