@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cd0jbiomea03q"]
+[gd_scene load_steps=12 format=3 uid="uid://23nxwac4hp67"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_7a8g2"]
 [ext_resource type="PackedScene" uid="uid://brnwv4snjk6fi" path="res://scenes/player.tscn" id="2_rmhlp"]
@@ -6,8 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://oa4rrxoui841" path="res://scenes/ground.tscn" id="4_r1111"]
 [ext_resource type="PackedScene" uid="uid://b63qmotsuhns8" path="res://scenes/walls.tscn" id="5_2pib7"]
 [ext_resource type="Script" path="res://scenes/resetters.gd" id="6_6fnn1"]
-[ext_resource type="Script" path="res://scenes/ground_resetter.gd" id="7_4b4be"]
 [ext_resource type="Script" path="res://scenes/despawner.gd" id="8_7m0gy"]
+[ext_resource type="Script" path="res://scenes/walls_spawner.gd" id="8_s5qck"]
+[ext_resource type="Script" path="res://scenes/score.gd" id="10_vxac8"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_e0ftt"]
 a = Vector2(-768, 0)
@@ -19,6 +20,19 @@ b = Vector2(-424, 0)
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_7a8g2")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Score" type="Label" parent="UI"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 99.0
+offset_bottom = 45.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "0
+"
+script = ExtResource("10_vxac8")
 
 [node name="Player" parent="." instance=ExtResource("2_rmhlp")]
 
@@ -55,7 +69,7 @@ shape = SubResource("SegmentShape2D_e0ftt")
 
 [node name="WallsSpawner" type="Area2D" parent="Resetters"]
 position = Vector2(0, 640)
-script = ExtResource("7_4b4be")
+script = ExtResource("8_s5qck")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Resetters/WallsSpawner"]
 shape = SubResource("SegmentShape2D_xc6xe")
@@ -68,6 +82,7 @@ script = ExtResource("8_7m0gy")
 position = Vector2(0, 248)
 shape = SubResource("SegmentShape2D_xc6xe")
 
+[connection signal="score" from="." to="UI/Score" method="_on_world_score"]
 [connection signal="area_exited" from="Resetters/Resetter" to="." method="_on_resetter_area_exited"]
 [connection signal="body_entered" from="Resetters/Resetter" to="Player" method="_on_resetter_body_entered"]
 [connection signal="body_entered" from="Resetters/WallsSpawner" to="Resetters/WallsSpawner" method="_on_body_entered"]

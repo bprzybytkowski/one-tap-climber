@@ -6,6 +6,7 @@ extends Area2D
 @export var maximum_gap_width : int = 3
 var current_platform_width = 0
 var current_gap_width = 0
+var floor_number : int
 
 func _ready():
 	for child in get_children():
