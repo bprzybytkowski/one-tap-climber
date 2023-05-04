@@ -4,82 +4,70 @@
 [ext_resource type="PackedScene" uid="uid://rsmuv7ei8ajd" path="res://scenes/platform.tscn" id="2_03rsg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c15e7"]
-size = Vector2(384, 16)
+size = Vector2(320, 16)
 
 [node name="Floor" type="Area2D"]
 script = ExtResource("1_jxmsx")
 
 [node name="Platform0" parent="." instance=ExtResource("2_03rsg")]
-position = Vector2(-184, 0)
-
-[node name="Platform1" parent="." instance=ExtResource("2_03rsg")]
-position = Vector2(-168, 0)
-
-[node name="Platform2" parent="." instance=ExtResource("2_03rsg")]
 position = Vector2(-152, 0)
 
-[node name="Platform3" parent="." instance=ExtResource("2_03rsg")]
+[node name="Platform1" parent="." instance=ExtResource("2_03rsg")]
 position = Vector2(-136, 0)
 
-[node name="Platform4" parent="." instance=ExtResource("2_03rsg")]
+[node name="Platform2" parent="." instance=ExtResource("2_03rsg")]
 position = Vector2(-120, 0)
 
-[node name="Platform5" parent="." instance=ExtResource("2_03rsg")]
+[node name="Platform3" parent="." instance=ExtResource("2_03rsg")]
 position = Vector2(-104, 0)
 
-[node name="Platform6" parent="." instance=ExtResource("2_03rsg")]
+[node name="Platform4" parent="." instance=ExtResource("2_03rsg")]
 position = Vector2(-88, 0)
 
-[node name="Platform7" parent="." instance=ExtResource("2_03rsg")]
+[node name="Platform5" parent="." instance=ExtResource("2_03rsg")]
 position = Vector2(-72, 0)
 
-[node name="Platform8" parent="." instance=ExtResource("2_03rsg")]
+[node name="Platform6" parent="." instance=ExtResource("2_03rsg")]
 position = Vector2(-56, 0)
 
-[node name="Platform9" parent="." instance=ExtResource("2_03rsg")]
+[node name="Platform7" parent="." instance=ExtResource("2_03rsg")]
 position = Vector2(-40, 0)
 
-[node name="Platform10" parent="." instance=ExtResource("2_03rsg")]
+[node name="Platform8" parent="." instance=ExtResource("2_03rsg")]
 position = Vector2(-24, 0)
 
-[node name="Platform11" parent="." instance=ExtResource("2_03rsg")]
+[node name="Platform9" parent="." instance=ExtResource("2_03rsg")]
 position = Vector2(-8, 0)
 
-[node name="Platform12" parent="." instance=ExtResource("2_03rsg")]
+[node name="Platform10" parent="." instance=ExtResource("2_03rsg")]
 position = Vector2(8, 0)
 
-[node name="Platform13" parent="." instance=ExtResource("2_03rsg")]
+[node name="Platform11" parent="." instance=ExtResource("2_03rsg")]
 position = Vector2(24, 0)
 
-[node name="Platform14" parent="." instance=ExtResource("2_03rsg")]
+[node name="Platform12" parent="." instance=ExtResource("2_03rsg")]
 position = Vector2(40, 0)
 
-[node name="Platform15" parent="." instance=ExtResource("2_03rsg")]
+[node name="Platform13" parent="." instance=ExtResource("2_03rsg")]
 position = Vector2(56, 0)
 
-[node name="Platform16" parent="." instance=ExtResource("2_03rsg")]
+[node name="Platform14" parent="." instance=ExtResource("2_03rsg")]
 position = Vector2(72, 0)
 
-[node name="Platform17" parent="." instance=ExtResource("2_03rsg")]
+[node name="Platform15" parent="." instance=ExtResource("2_03rsg")]
 position = Vector2(88, 0)
 
-[node name="Platform18" parent="." instance=ExtResource("2_03rsg")]
+[node name="Platform16" parent="." instance=ExtResource("2_03rsg")]
 position = Vector2(104, 0)
 
-[node name="Platform19" parent="." instance=ExtResource("2_03rsg")]
+[node name="Platform17" parent="." instance=ExtResource("2_03rsg")]
 position = Vector2(120, 0)
 
-[node name="Platform20" parent="." instance=ExtResource("2_03rsg")]
+[node name="Platform18" parent="." instance=ExtResource("2_03rsg")]
 position = Vector2(136, 0)
 
-[node name="Platform21" parent="." instance=ExtResource("2_03rsg")]
+[node name="Platform19" parent="." instance=ExtResource("2_03rsg")]
 position = Vector2(152, 0)
-
-[node name="Platform22" parent="." instance=ExtResource("2_03rsg")]
-position = Vector2(168, 0)
-
-[node name="Platform23" parent="." instance=ExtResource("2_03rsg")]
-position = Vector2(184, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_c15e7")

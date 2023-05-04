@@ -1,21 +1,24 @@
 extends CharacterBody2D
 
-const SPEED = 140.0
-const JUMP_VELOCITY = -480.0
+const SPEED = 100.0
+const JUMP_VELOCITY = -350.0
 
 var direction = 1
+var time_since_last_direction_change = 0
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
+signal jumped()
+
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _physics_process(delta):
-	# Add the gravity.
+	time_since_last_direction_change += delta
+	
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
-	# Handle Jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
+		emit_signal("jumped")
 	
 	if direction:
 		velocity.x = direction * SPEED
@@ -25,8 +28,15 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _on_area_2d_body_entered(body):
-	if "Walls" in body.name:
+	# check time_since_last_direction_change to avoid direction changing twice
+	# when touching adjacent walls
+	if time_since_last_direction_change > 0.1 && "Walls" in body.name:
 		direction *= -1
+		if direction == -1:
+			get_node("Sprite2D").flip_h = true
+		else:
+			get_node("Sprite2D").flip_h = false
+		time_since_last_direction_change = 0
 
 func _on_resetter_body_entered(body):
 	if body.name == "Player":

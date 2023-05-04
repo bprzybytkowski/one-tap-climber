@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://23nxwac4hp67"]
+[gd_scene load_steps=13 format=3 uid="uid://23nxwac4hp67"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_7a8g2"]
 [ext_resource type="PackedScene" uid="uid://brnwv4snjk6fi" path="res://scenes/player.tscn" id="2_rmhlp"]
+[ext_resource type="FontFile" uid="uid://8us5vm8ve6ts" path="res://assets/fonts/Bookxel.otf" id="2_wedc5"]
 [ext_resource type="Script" path="res://scenes/camera.gd" id="3_ldhw2"]
 [ext_resource type="PackedScene" uid="uid://oa4rrxoui841" path="res://scenes/ground.tscn" id="4_r1111"]
 [ext_resource type="PackedScene" uid="uid://b63qmotsuhns8" path="res://scenes/walls.tscn" id="5_2pib7"]
@@ -11,12 +12,12 @@
 [ext_resource type="Script" path="res://scenes/score.gd" id="10_vxac8"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_e0ftt"]
-a = Vector2(-768, 0)
-b = Vector2(768, 0)
+a = Vector2(-256, 0)
+b = Vector2(256, 0)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_xc6xe"]
-a = Vector2(424, 0)
-b = Vector2(-424, 0)
+a = Vector2(256, 0)
+b = Vector2(-256, 0)
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_7a8g2")
@@ -28,8 +29,8 @@ offset_left = 8.0
 offset_top = 8.0
 offset_right = 99.0
 offset_bottom = 45.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 18
+theme_override_fonts/font = ExtResource("2_wedc5")
+theme_override_font_sizes/font_size = 24
 text = "0
 "
 script = ExtResource("10_vxac8")
@@ -43,35 +44,35 @@ script = ExtResource("10_vxac8")
 [node name="WallsNode" type="Node2D" parent="."]
 
 [node name="Walls" parent="WallsNode" instance=ExtResource("5_2pib7")]
-position = Vector2(0, -352)
+position = Vector2(0, -192)
 
 [node name="Resetters" type="Node2D" parent="."]
-position = Vector2(0, -384)
+position = Vector2(0, -64)
 script = ExtResource("6_6fnn1")
 
 [node name="Resetter" type="Area2D" parent="Resetters"]
-position = Vector2(0, 472)
+position = Vector2(0, 128)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Resetters/Resetter"]
 shape = SubResource("SegmentShape2D_e0ftt")
 
 [node name="WallsSpawner" type="Area2D" parent="Resetters"]
-position = Vector2(0, 640)
+position = Vector2(0, 192)
 script = ExtResource("8_s5qck")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Resetters/WallsSpawner"]
 shape = SubResource("SegmentShape2D_xc6xe")
 
 [node name="Despawner" type="Area2D" parent="Resetters"]
-position = Vector2(0, 1544)
+position = Vector2(0, 1280)
 script = ExtResource("8_7m0gy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Resetters/Despawner"]
-position = Vector2(0, 248)
+position = Vector2(0, -640)
 shape = SubResource("SegmentShape2D_xc6xe")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -352)
+position = Vector2(0, -64)
 script = ExtResource("3_ldhw2")
 
 [connection signal="score" from="." to="UI/Score" method="_on_world_score"]

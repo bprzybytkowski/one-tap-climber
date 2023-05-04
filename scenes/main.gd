@@ -5,8 +5,8 @@ class_name Main
 var floor_scene = preload("res://scenes/floor.tscn")
 @onready var floors_node = get_node("Floors")
 @export var floorsToCreate : int = 12
-var yPos : float = -96
-var yPosStep : float = -96
+var yPosStep : float = -64
+var yPos : float = yPosStep + 8 # first floor lower by a half of platform's height
 var floor_number : int = 1
 var current_score : int = 0
 
