@@ -40,4 +40,5 @@ func _on_area_2d_body_entered(body):
 
 func _on_resetter_body_entered(body):
 	if body.name == "Player":
-		get_tree().reload_current_scene()
+		body.set_physics_process(false)
+		get_node("../UI/GameOver").visible = true

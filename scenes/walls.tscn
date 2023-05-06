@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://b63qmotsuhns8"]
 
-[ext_resource type="Texture2D" uid="uid://c2jr5e0lu2ye2" path="res://assets/monochrome_tilemap_transparent_packed.png" id="2_l4sks"]
+[ext_resource type="Texture2D" uid="uid://deulmsffcipe" path="res://assets/monochrome_tilemap_transparent_packed.png" id="2_l4sks"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e3sll"]
 size = Vector2(16, 384)
@@ -421,6 +421,7 @@ position = Vector2(168, 0)
 shape = SubResource("RectangleShape2D_jejhj")
 
 [node name="TileMap" type="TileMap" parent="."]
+modulate = Color(0.607843, 0.878431, 0.72549, 1)
 texture_filter = 1
 tile_set = SubResource("TileSet_lpwwf")
 format = 2

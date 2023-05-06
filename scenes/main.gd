@@ -35,4 +35,6 @@ func _update_score(area, floor_instance):
 	if area.name == "PlayerArea2D" && area.get_parent().is_on_floor() && floor_instance.floor_number > current_score:
 		current_score = floor_instance.floor_number
 		score.emit(current_score)
-  
+ 
+func _on_button_pressed():
+	get_tree().reload_current_scene()
