@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_7a8g2"]
 [ext_resource type="PackedScene" uid="uid://brnwv4snjk6fi" path="res://scenes/player.tscn" id="2_rmhlp"]
-[ext_resource type="FontFile" uid="uid://ddn0yxj16tu1q" path="res://assets/fonts/Bookxel.otf" id="2_wedc5"]
+[ext_resource type="FontFile" uid="uid://8us5vm8ve6ts" path="res://assets/fonts/Bookxel.otf" id="2_wedc5"]
 [ext_resource type="Script" path="res://scenes/camera.gd" id="3_ldhw2"]
 [ext_resource type="PackedScene" uid="uid://oa4rrxoui841" path="res://scenes/ground.tscn" id="4_r1111"]
 [ext_resource type="PackedScene" uid="uid://b63qmotsuhns8" path="res://scenes/walls.tscn" id="5_2pib7"]
@@ -12,11 +12,7 @@
 [ext_resource type="Script" path="res://scenes/score.gd" id="10_vxac8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bul28"]
-bg_color = Color(0.6072, 0.88, 0.725413, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
+bg_color = Color(0.483, 0.7, 0.577033, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_n3smk"]
 font = ExtResource("2_wedc5")
@@ -132,14 +128,14 @@ position = Vector2(0, 128)
 shape = SubResource("SegmentShape2D_e0ftt")
 
 [node name="WallsSpawner" type="Area2D" parent="Resetters"]
-position = Vector2(0, 192)
+position = Vector2(0, 176)
 script = ExtResource("8_s5qck")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Resetters/WallsSpawner"]
 shape = SubResource("SegmentShape2D_xc6xe")
 
 [node name="Despawner" type="Area2D" parent="Resetters"]
-position = Vector2(0, 1280)
+position = Vector2(0, 1264)
 script = ExtResource("8_7m0gy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Resetters/Despawner"]

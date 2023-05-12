@@ -2,9 +2,13 @@ extends CharacterBody2D
 
 const SPEED = 100.0
 const JUMP_VELOCITY = -350.0
+const CHARGED_JUMP_VELOCITY = -470
+const MAX_CHARGE_TIME = 0.8
 
 var direction = 1
 var time_since_last_direction_change = 0
+var charge_timer = 0.0
+var is_jump_charged = false
 
 signal jumped()
 
@@ -16,10 +20,21 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-		emit_signal("jumped")
-	
+	if Input.is_action_pressed("jump"):
+		charge_timer += delta
+		if charge_timer >= MAX_CHARGE_TIME:
+			is_jump_charged = true
+
+	if Input.is_action_just_released("jump"):
+		if is_on_floor():
+			if is_jump_charged:
+				velocity.y = CHARGED_JUMP_VELOCITY
+			else:
+				velocity.y = JUMP_VELOCITY
+			emit_signal("jumped")
+		charge_timer = 0.0
+		is_jump_charged = false
+		
 	if direction:
 		velocity.x = direction * SPEED
 	else:
