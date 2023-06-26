@@ -11,6 +11,7 @@ var charge_timer = 0.0
 var is_jump_charged = false
 
 signal jumped()
+signal player_killed()
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -55,5 +56,5 @@ func _on_area_2d_body_entered(body):
 
 func _on_resetter_body_entered(body):
 	if body.name == "Player":
+		emit_signal("player_killed")
 		body.set_physics_process(false)
-		get_node("../UI/GameOver").visible = true
