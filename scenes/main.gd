@@ -40,7 +40,7 @@ func create_new_floor(currentYPos : float):
 	floor_number += 1
 
 func _on_resetter_area_exited(area):
-	if "Floor" in area.name:
+	if area.get_parent() == floors_node:
 		create_new_floor(yPos)
 
 func _update_score(area, floor_instance):

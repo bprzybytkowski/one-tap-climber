@@ -7,8 +7,8 @@ var walls_instance = preload("res://scenes/walls.tscn").instantiate()
 @onready var current_walls_height = walls_height
 
 func _on_body_entered(body):
-	if "Walls" in body.name:   
+	if body.get_parent() == walls_node:
 		var new_walls_instance = preload("res://scenes/walls.tscn").instantiate()
 		new_walls_instance.position.y = -current_walls_height - walls_height_offset
-		walls_node.call_deferred("add_child", new_walls_instance)
+		walls_node.call_deferred("add_child", new_walls_instance, true)
 		current_walls_height += walls_height

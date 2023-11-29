@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_7a8g2"]
 [ext_resource type="PackedScene" uid="uid://brnwv4snjk6fi" path="res://scenes/player.tscn" id="2_rmhlp"]
-[ext_resource type="FontFile" uid="uid://fcswimeoowca" path="res://assets/fonts/Bookxel.otf" id="2_wedc5"]
+[ext_resource type="FontFile" uid="uid://dbh1yi1d1liif" path="res://assets/fonts/Bookxel.otf" id="2_wedc5"]
 [ext_resource type="Script" path="res://scenes/camera.gd" id="3_ldhw2"]
 [ext_resource type="PackedScene" uid="uid://c2s7me3ew35ab" path="res://scenes/game_over.tscn" id="4_46t02"]
 [ext_resource type="PackedScene" uid="uid://oa4rrxoui841" path="res://scenes/ground.tscn" id="4_r1111"]
