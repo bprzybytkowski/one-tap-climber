@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://c2s7me3ew35ab"]
 
-[ext_resource type="FontFile" uid="uid://fcswimeoowca" path="res://assets/fonts/Bookxel.otf" id="1_302d7"]
+[ext_resource type="FontFile" uid="uid://ds3qwc37kp6e1" path="res://assets/fonts/Bookxel.otf" id="1_302d7"]
 [ext_resource type="Script" path="res://scenes/game_over.gd" id="1_fk5hh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bul28"]
