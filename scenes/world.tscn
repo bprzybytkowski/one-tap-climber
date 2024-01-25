@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://23nxwac4hp67"]
+[gd_scene load_steps=15 format=3 uid="uid://23nxwac4hp67"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_7a8g2"]
 [ext_resource type="PackedScene" uid="uid://brnwv4snjk6fi" path="res://scenes/player.tscn" id="2_rmhlp"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c2s7me3ew35ab" path="res://scenes/game_over.tscn" id="4_46t02"]
 [ext_resource type="PackedScene" uid="uid://oa4rrxoui841" path="res://scenes/ground.tscn" id="4_r1111"]
 [ext_resource type="PackedScene" uid="uid://b63qmotsuhns8" path="res://scenes/walls.tscn" id="5_2pib7"]
+[ext_resource type="PackedScene" uid="uid://3otsdwlibjid" path="res://scenes/pause.tscn" id="5_gfuow"]
 [ext_resource type="Script" path="res://scenes/resetters.gd" id="6_6fnn1"]
 [ext_resource type="Script" path="res://scenes/despawner.gd" id="8_7m0gy"]
 [ext_resource type="Script" path="res://scenes/walls_spawner.gd" id="8_s5qck"]
@@ -38,6 +39,23 @@ script = ExtResource("10_vxac8")
 
 [node name="GameOver" parent="UI" instance=ExtResource("4_46t02")]
 visible = false
+
+[node name="Pause" parent="UI" instance=ExtResource("5_gfuow")]
+
+[node name="PauseButton" type="Button" parent="UI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -99.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = 45.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("2_wedc5")
+theme_override_font_sizes/font_size = 24
+text = "‖"
+flat = true
+alignment = 2
 
 [node name="Player" parent="." instance=ExtResource("2_rmhlp")]
 
@@ -80,6 +98,7 @@ position = Vector2(0, -64)
 script = ExtResource("3_ldhw2")
 
 [connection signal="score" from="." to="UI/Score" method="_on_world_score"]
+[connection signal="pressed" from="UI/PauseButton" to="." method="_on_pause_button_pressed"]
 [connection signal="player_killed" from="Player" to="." method="_on_player_killed"]
 [connection signal="area_exited" from="Resetters/Resetter" to="." method="_on_resetter_area_exited"]
 [connection signal="body_entered" from="Resetters/Resetter" to="Player" method="_on_resetter_body_entered"]

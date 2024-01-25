@@ -1,6 +1,6 @@
 extends Control
 
-func _on_button_pressed():
+func _on_restart_button_pressed():
 	get_tree().reload_current_scene()
 	
 func set_high_score(score):

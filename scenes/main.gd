@@ -5,6 +5,9 @@ class_name Main
 var floor_scene = preload("res://scenes/floor.tscn")
 @onready var floors_node = get_node("Floors")
 @export var floorsToCreate : int = 12
+@onready var camera = get_node("Camera2D")
+@onready var player = get_node("Player")
+@onready var pause = get_node("UI/Pause")
 var yPosStep : float = -64
 var yPos : float = yPosStep + 8 # first floor lower by a half of platform's height
 var floor_number : int = 1
@@ -15,6 +18,7 @@ var high_score : int
 signal score(score)
 
 func _ready():
+	pause.get_node("Panel/ResumeButton").connect("pressed", _on_resume_button_pressed)
 	var save_file = FileAccess.open("user://save.data", FileAccess.READ)
 	if save_file != null:
 		high_score = save_file.get_32()
@@ -57,5 +61,15 @@ func _on_player_killed():
 	game_over.set_score(current_score)
 	game_over.set_high_score(high_score)
 	game_over.visible = true
+	camera.start_scrolling = false
 	save_game()
 	
+func _on_pause_button_pressed():
+	camera.start_scrolling = false
+	player.set_physics_process(false)
+	pause.visible = true
+
+func _on_resume_button_pressed():
+	camera.start_scrolling = true
+	pause.visible = false
+	player.set_physics_process(true)

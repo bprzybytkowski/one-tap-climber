@@ -8,6 +8,8 @@ const MAX_CHARGE_TIME = 0.8
 var direction = 1
 var time_since_last_direction_change = 0
 var charge_timer = 0.0
+var is_jump_pressed = false
+var is_jump_released = false
 var is_jump_charged = false
 
 signal jumped()
@@ -15,18 +17,29 @@ signal player_killed()
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+func _ready():
+	set_process_unhandled_input(true)
+
+# used _unhandled_input to prevent jumping when interacting with menu
+func _unhandled_input(event):
+	if event.is_action_pressed("jump"):
+		is_jump_pressed = true
+	if event.is_action_released("jump"):
+			is_jump_released = true
+			is_jump_pressed = false
+	
 func _physics_process(delta):
 	time_since_last_direction_change += delta
 	
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
-	if Input.is_action_pressed("jump"):
+	if is_jump_pressed:
 		charge_timer += delta
 		if charge_timer >= MAX_CHARGE_TIME:
 			is_jump_charged = true
 
-	if Input.is_action_just_released("jump"):
+	if is_jump_released:
 		if is_on_floor():
 			if is_jump_charged:
 				velocity.y = CHARGED_JUMP_VELOCITY
@@ -35,6 +48,7 @@ func _physics_process(delta):
 			emit_signal("jumped")
 		charge_timer = 0.0
 		is_jump_charged = false
+		is_jump_released = false
 		
 	if direction:
 		velocity.x = direction * SPEED
