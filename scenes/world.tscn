@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://23nxwac4hp67"]
+[gd_scene load_steps=17 format=3 uid="uid://23nxwac4hp67"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_7a8g2"]
 [ext_resource type="PackedScene" uid="uid://brnwv4snjk6fi" path="res://scenes/player.tscn" id="2_rmhlp"]
@@ -9,9 +9,12 @@
 [ext_resource type="PackedScene" uid="uid://b63qmotsuhns8" path="res://scenes/walls.tscn" id="5_2pib7"]
 [ext_resource type="PackedScene" uid="uid://3otsdwlibjid" path="res://scenes/pause.tscn" id="5_gfuow"]
 [ext_resource type="Script" path="res://scenes/resetters.gd" id="6_6fnn1"]
+[ext_resource type="Texture2D" uid="uid://colpqa1f1p2eo" path="res://assets/one-bit-icons/pause.png" id="6_v7dqp"]
 [ext_resource type="Script" path="res://scenes/despawner.gd" id="8_7m0gy"]
 [ext_resource type="Script" path="res://scenes/walls_spawner.gd" id="8_s5qck"]
 [ext_resource type="Script" path="res://scenes/score.gd" id="10_vxac8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bqkey"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_e0ftt"]
 a = Vector2(-256, 0)
@@ -51,11 +54,15 @@ offset_top = 8.0
 offset_right = -8.0
 offset_bottom = 45.0
 grow_horizontal = 0
+theme_type_variation = &"FlatButton"
 theme_override_fonts/font = ExtResource("2_wedc5")
 theme_override_font_sizes/font_size = 24
-text = "‖"
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bqkey")
+action_mode = 0
+icon = ExtResource("6_v7dqp")
 flat = true
-alignment = 2
+icon_alignment = 2
+vertical_icon_alignment = 0
 
 [node name="Player" parent="." instance=ExtResource("2_rmhlp")]
 

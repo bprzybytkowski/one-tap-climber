@@ -7,6 +7,7 @@ extends Camera2D
 @export var top_margin : float = 0.25
 
 var start_scrolling : bool = false
+var has_started : bool = false
 
 @onready var player = get_node(target_path)
 
@@ -23,7 +24,8 @@ func _process(delta):
 
 	if start_scrolling:
 		# steadily move the camera upwards
-		global_position.y -= upward_speed * delta  
+		global_position.y -= upward_speed * delta
+		has_started = true
 
 func _set_start_scrolling():
 	start_scrolling = true

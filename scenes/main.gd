@@ -8,6 +8,7 @@ var floor_scene = preload("res://scenes/floor.tscn")
 @onready var camera = get_node("Camera2D")
 @onready var player = get_node("Player")
 @onready var pause = get_node("UI/Pause")
+@onready var pause_button = get_node("UI/PauseButton")
 var yPosStep : float = -64
 var yPos : float = yPosStep + 8 # first floor lower by a half of platform's height
 var floor_number : int = 1
@@ -61,15 +62,19 @@ func _on_player_killed():
 	game_over.set_score(current_score)
 	game_over.set_high_score(high_score)
 	game_over.visible = true
-	camera.start_scrolling = false
+	#camera.start_scrolling = false
+	pause_button.disabled = true
 	save_game()
 	
 func _on_pause_button_pressed():
 	camera.start_scrolling = false
 	player.set_physics_process(false)
 	pause.visible = true
+	pause_button.disabled = true
 
 func _on_resume_button_pressed():
-	camera.start_scrolling = true
+	if camera.has_started:
+		camera.start_scrolling = true
 	pause.visible = false
+	pause_button.disabled = false
 	player.set_physics_process(true)
