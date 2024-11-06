@@ -62,19 +62,18 @@ func _on_player_killed():
 	game_over.set_score(current_score)
 	game_over.set_high_score(high_score)
 	game_over.visible = true
-	#camera.start_scrolling = false
 	pause_button.disabled = true
 	save_game()
 	
 func _on_pause_button_pressed():
-	camera.start_scrolling = false
+	camera.scrolling = false
 	player.set_physics_process(false)
 	pause.visible = true
 	pause_button.disabled = true
 
 func _on_resume_button_pressed():
 	if camera.has_started:
-		camera.start_scrolling = true
+		camera.scrolling = true
 	pause.visible = false
 	pause_button.disabled = false
 	player.set_physics_process(true)

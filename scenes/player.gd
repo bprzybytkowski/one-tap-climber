@@ -16,6 +16,7 @@ var can_vibrate = true
 signal jumped()
 signal player_killed()
 signal jump_charged()
+signal jump_released()
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -42,12 +43,14 @@ func _physics_process(delta):
 			get_node("Sprite2D").set_self_modulate(Color(1,1.5-(charge_timer/MAX_CHARGE_TIME),1.5-(charge_timer/MAX_CHARGE_TIME),1))
 		if charge_timer >= MAX_CHARGE_TIME:
 			is_jump_charged = true
+			emit_signal("jump_charged")
 			if can_vibrate:
 				Input.vibrate_handheld(150)
 				can_vibrate = false
 			
 
 	if is_jump_released:
+		emit_signal("jump_released")
 		if is_on_floor():
 			if is_jump_charged:
 				velocity.y = CHARGED_JUMP_VELOCITY
